@@ -1,27 +1,47 @@
 class LinkedList {
-    constructor(headNode=null, tailNode=null) {
+    constructor(headNode = null, tailNode = null) {
         this.headNode = headNode;
         this.tailNode = tailNode;
     }
 
+    // Add node to end of list
     append(value) {
-        const newNode = new Node(value, null)
+        const newNode = new Node(value, null);
         if (this.headNode === null) {
-            this.headNode = newNode
-            this.tailNode = newNode
+            this.headNode = newNode;
+            this.tailNode = newNode;
         } else {
             this.tailNode.nextNode = newNode;
             this.tailNode = this.tailNode.nextNode;
         }
     }
-    prepend(value) {}
-    size() {}
+
+    // Add node to beginning of list
+    prepend(value) {
+        const newNode = new Node(value, this.head());
+        this.head = newNode;
+    }
+
+    // Total number of nodes in the list
+    size() {
+        let count = 0;
+        let currentNode = this.head();
+        while (currentNode.nextNode != null) {
+            currentNode = currentNode.nextNode;
+            count++;
+        }
+    }
+
+    // First node in the list
     head() {
         return this.headNode;
     }
+
+    // Last node in the list
     tail() {
         return this.tailNode;
     }
+
     at(index) {}
     pop() {}
     contains(value) {}
