@@ -77,7 +77,17 @@ class LinkedList {
     }
 
     // Return true if value is in the list, otherwise false
-    contains(value) {}
+    contains(value) {
+        let currentNode = this.head();
+        while (currentNode != null) {
+            if (currentNode.value === value) {
+                return true;
+            } else {
+                currentNode = currentNode.nextNode
+            }
+        }
+        return false
+    }
 
     // Return the index of the node containing value, or null if not found
     find(value) {}
