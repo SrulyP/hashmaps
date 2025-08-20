@@ -63,9 +63,26 @@ class LinkedList {
         }
     }
 
-    pop() {}
+    // Remove the last element from the list
+    pop() {
+        if (this.head() === null) {
+            throw new Error('Linked list is empty: Nothing to remove.');
+        } else if (this.head() === this.tail()) {
+            this.headNode = null;
+            this.tailNode = null;
+        } else {
+            this.tailNode = this.at(this.size() - 2);
+            this.tailNode.nextNode = null;
+        }
+    }
+
+    // Return true if value is in the list, otherwise false
     contains(value) {}
+
+    // Return the index of the node containing value, or null if not found
     find(value) {}
+
+    // Represent the LinkedList objects as strings
     toString() {}
 }
 
