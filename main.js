@@ -18,8 +18,11 @@ class LinkedList {
 
     // Add node to beginning of list
     prepend(value) {
-        const newNode = new Node(value, this.head());
-        this.head = newNode;
+        const newNode = new Node(value, this.headNode);
+        this.headNode = newNode;
+        if (this.tailNode === null) {
+            this.tailNode = newNode;
+        }
     }
 
     // Total number of nodes in the list
@@ -42,7 +45,13 @@ class LinkedList {
         return this.tailNode;
     }
 
-    at(index) {}
+    // Node at the given index
+    at(index) {
+        if (index > this.size()) {
+            throw new Error('Index larger than size of linked list');
+        }
+    }
+
     pop() {}
     contains(value) {}
     find(value) {}
