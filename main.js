@@ -105,7 +105,16 @@ class LinkedList {
     }
 
     // Represent the LinkedList objects as strings
-    toString() {}
+    toString() {
+        let string = '';
+        let currentNode = this.head();
+        while (currentNode != null) {
+            string += `(${currentNode.value}) -> `;
+            currentNode = currentNode.nextNode;
+        }
+        string += 'null';
+        return string;
+    }
 }
 
 class Node {
