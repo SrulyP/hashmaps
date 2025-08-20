@@ -25,30 +25,41 @@ class LinkedList {
         }
     }
 
-    // Total number of nodes in the list
+    // Return total number of nodes in the list
     size() {
-        let count = 0;
-        let currentNode = this.head();
-        while (currentNode.nextNode != null) {
-            currentNode = currentNode.nextNode;
-            count++;
+        if (this.head() === null) {
+            return 0;
+        } else {
+            let count = 1;
+            let currentNode = this.head();
+            while (currentNode.nextNode != null) {
+                count++;
+                currentNode = currentNode.nextNode;
+            }
+            return count;
         }
     }
 
-    // First node in the list
+    // Return first node in the list
     head() {
         return this.headNode;
     }
 
-    // Last node in the list
+    // Return last node in the list
     tail() {
         return this.tailNode;
     }
 
-    // Node at the given index
+    // Return node at the given index
     at(index) {
-        if (index > this.size()) {
+        if (index >= this.size()) {
             throw new Error('Index larger than size of linked list');
+        } else {
+            let currentNode = this.head();
+            for (let i = 0; i < index; i++) {
+                currentNode = currentNode.nextNode;
+            }
+            return currentNode;
         }
     }
 
