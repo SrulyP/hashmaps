@@ -94,10 +94,22 @@ class HashMap {
     }
 
     // Return the number of stored keys in the hash map.
-    length() {}
+    length() {
+        let count = 0;
+        const keyHash = this.hash(key);
+        const list = this.buckets[keyHash];
+        if (list) {
+            count += list.size();
+        }
+        return count;
+    }
 
     // Remove all entries in the hash map.
-    clear() {}
+    clear() {
+        this.capacity = 16;
+        const newBuckets = new Array(this.capacity);
+        this.buckets = newBuckets;
+    }
 
     // Return an array containing all the keys inside the hash map.
     keys() {}
