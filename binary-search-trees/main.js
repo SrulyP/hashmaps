@@ -42,11 +42,30 @@ class Tree {
     insert(value) {
         const newNode = new Node(value);
         let currNode = this.root;
-        if (value > currNode.data) {
-            // go right
-        } else if (value < currNode.data) {
-            // go left
+        let parentNode;
+
+        if (currNode === null) {
+            return;
         }
+
+        // loop through to find where to insert the new node
+        while (currNode != null) {
+            parentNode = currNode;
+            if (value > currNode.data) {
+                currNode = currNode.right;
+            } else if (value < currNode.data) {
+                currNode = currNode.left;
+            } else if (value === currNode.data) {
+                return;
+            }
+        }
+        // once you get to the node you wanna insert into: insert it on the correct side
+        if (value > parentNode.data) {
+            parentNode.right = newNode;
+        } else {
+            parentNode.left = newNode;
+        }
+        return;
     }
 
     deleteItem(value) {}
