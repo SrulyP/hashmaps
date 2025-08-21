@@ -151,7 +151,7 @@ export class LinkedList {
         let currentNode = this.head();
         while (currentNode != null) {
             string += `(${currentNode.key}: ${currentNode.value}) -> `;
-            currentNode = currentNode.nextNode; // ✅ advance
+            currentNode = currentNode.nextNode;
         }
         string += 'null';
         return string;
