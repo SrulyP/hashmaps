@@ -96,11 +96,13 @@ class HashMap {
     // Return the number of stored keys in the hash map.
     length() {
         let count = 0;
-        const keyHash = this.hash(key);
-        const list = this.buckets[keyHash];
-        if (list) {
-            count += list.size();
+        for (let i = 0; i < this.capacity; i++) {
+            const list = this.buckets[i];
+            if (list) {
+                count += list.size();
+            }
         }
+       
         return count;
     }
 
@@ -112,7 +114,11 @@ class HashMap {
     }
 
     // Return an array containing all the keys inside the hash map.
-    keys() {}
+    keys() {
+        let keys = [];
+        
+        if (list) {
+    }
 
     // Return an array containing all the values.
     values() {}
