@@ -1,8 +1,8 @@
 class Node {
-    constructor(data, left, right) {
+    constructor(data) {
         this.data = data;
-        this.left = left;
-        this.right = right;
+        this.left = null;
+        this.right = null;
     }
 }
 
@@ -13,7 +13,12 @@ class Tree {
     }
 
     // Create a balanced binary tree full of Node objects. Return the level - 0 root node.
-    buildTree(array) {}
+    buildTree(array) {
+        array = array.sort((a, b) => a - b);
+        array = [ ...new Set(array) ];
+
+    }
+
     insert(value) {}
 
     deleteItem(value) {}
