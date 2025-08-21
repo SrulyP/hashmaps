@@ -21,11 +21,26 @@ class HashMap {
 
     increaseCapacity() {
         this.capacity *= 2;
+        // go through array, each linked list and rehash all the nodes
     }
 
-    set(key, value) {}
+    set(key, value) {
+        keyHash = hash(key);
+        index = this.buckets[keyHash].LinkedList.find(value);
+        if (!index) {
+            this.buckets[keyHash].LinkedList.append()
+        }
 
-    get(key) {}
+        this.buckets[keyHash].append(Node(key, value));
+        if (this.length() > this.loadFactor * this.capacity) {
+            this.increaseCapacity();
+        }
+    }
+
+    get(key) {
+
+    }
+
     has(key) {}
     remove(key) {}
     length() {}
