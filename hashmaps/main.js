@@ -80,7 +80,18 @@ class HashMap {
     }
 
     // Remove the entry with that key and return true. If the key isn’t in hash map, return false.
-    remove(key) {}
+    remove(key) {
+        const keyHash = this.hash(key);
+        const list = this.buckets[keyHash];
+        if (list) {
+            const index = list.findKey(key);
+            if (index) {
+                list.removeAtIndex(index);
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Return the number of stored keys in the hash map.
     length() {}
