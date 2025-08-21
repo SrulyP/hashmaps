@@ -60,7 +60,14 @@ class HashMap {
     }
 
     // Returns value that's assigned to the key. If a key is not found, return null.
-    get(key) {}
+    get(key) {
+        const keyHash = this.hash(key);
+        const list = this.buckets[keyHash];
+        if (list) {
+            return list.getValueByKey(key);
+        }
+        return null;
+    }
 
     // Returns true or false based on whether or not the key is in the hash map.
     has(key) {}
