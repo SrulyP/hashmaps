@@ -157,6 +157,24 @@ export class LinkedList {
         return null;
     }
 
+    removeAtIndex(index) {
+        if (index < 0 || index >= this.size()) {
+            throw new Error('Index out of bounds');
+        }
+        if (index === 0) {
+            this.pop();
+        } else {
+            let currentNode = this.head();
+            for (let i = 0; i < index - 1; i++) {
+                currentNode = currentNode.nextNode;
+            }
+            if (currentNode.nextNode === this.tail()) {
+                this.tailNode = currentNode;
+            }
+            currentNode.nextNode = currentNode.nextNode.nextNode;
+        }
+    }
+
     // Represent the LinkedList objects as strings
     toString() {
         let string = '';
