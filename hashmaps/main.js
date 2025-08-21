@@ -51,7 +51,7 @@ class HashMap {
         if (list.containsKey(key)) {
             list.updateValue(key, value);
         } else {
-            list.append(new Node(key, value));
+            list.append(key, value);
 
             if (this.length() > this.loadFactor * this.capacity) {
                 this.increaseCapacity();
