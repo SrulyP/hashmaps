@@ -70,7 +70,14 @@ class HashMap {
     }
 
     // Returns true or false based on whether or not the key is in the hash map.
-    has(key) {}
+    has(key) {
+        const keyHash = this.hash(key);
+        const list = this.buckets[keyHash];
+        if (list) {
+            return list.containsKey(key);
+        }
+        return false;
+    }
 
     // Remove the entry with that key and return true. If the key isn’t in hash map, return false.
     remove(key) {}
