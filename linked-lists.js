@@ -5,8 +5,8 @@ export class LinkedList {
     }
 
     // Add node to end of list
-    append(value) {
-        const newNode = new Node(value, null);
+    append(key, value) {
+        const newNode = new Node(key, value, null);
         if (this.headNode === null) {
             this.headNode = newNode;
             this.tailNode = newNode;
@@ -17,8 +17,8 @@ export class LinkedList {
     }
 
     // Add node to beginning of list
-    prepend(value) {
-        const newNode = new Node(value, this.headNode);
+    prepend(key, value) {
+        const newNode = new Node(key, value, this.headNode);
         this.headNode = newNode;
         if (this.tailNode === null) {
             this.tailNode = newNode;
@@ -77,7 +77,7 @@ export class LinkedList {
     }
 
     // Return true if value is in the list, otherwise false
-    contains(value) {
+    containsVal(value) {
         let currentNode = this.head();
         while (currentNode != null) {
             if (currentNode.value === value) {
@@ -89,12 +89,40 @@ export class LinkedList {
         return false;
     }
 
+    // Return true if key is in the list, otherwise false
+    containsKey(key) {
+        let currentNode = this.head();
+        while (currentNode != null) {
+            if (currentNode.key === key) {
+                return true;
+            } else {
+                currentNode = currentNode.nextNode;
+            }
+        }
+        return false;
+    }
+
     // Return the index of the node containing value, or null if not found
-    find(value) {
+    findVal(value) {
         let currentNode = this.head();
         let index = 0;
         while (currentNode != null) {
             if (currentNode.value === value) {
+                return index;
+            } else {
+                currentNode = currentNode.nextNode;
+                index++;
+            }
+        }
+        return null;
+    }
+
+    // Return the index of the node containing key, or null if not found
+    findKey(key) {
+        let currentNode = this.head();
+        let index = 0;
+        while (currentNode != null) {
+            if (currentNode.key === key) {
                 return index;
             } else {
                 currentNode = currentNode.nextNode;
@@ -109,8 +137,8 @@ export class LinkedList {
         let string = '';
         let currentNode = this.head();
         while (currentNode != null) {
-            string += `(${currentNode.value}) -> `;
-            currentNode = currentNode.nextNode;
+            string += `(${currentNode.key}: ${currentNode.value}) -> `;
+            currentNode = currentNode.nextNode; // ✅ advance
         }
         string += 'null';
         return string;
@@ -118,7 +146,8 @@ export class LinkedList {
 }
 
 export class Node {
-    constructor(value = null, nextNode = null) {
+    constructor(key = null, value = null, nextNode = null) {
+        this.key = key;
         this.value = value;
         this.nextNode = nextNode;
     }
