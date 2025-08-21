@@ -27,15 +27,22 @@ class HashMap {
         this.capacity *= 2;
         this.buckets = new Array(this.capacity);
 
+        // go through each index in the array, if there is a linked list there:
+        // go through each node in the linked list and rehash using their key
         for (let i = 0; i < oldCapacity; i++) {
             if (oldBuckets[i]) {
-                // go through each linked list and rehash all the nodes
+                let currentNode = oldBuckets[i].head();
+                while (currentNode != null) {
+                    this.set(currentNode.key, currentNode.value);
+                    currentNode = currentNode.nextNode;
+                }
             }
         }
     }
 
     // Update or set a key's value in the hashmap.
     set(key, value) {
+        const keyHash = this.hash(key);
         if (!this.buckets[keyHash]) {
             this.buckets[keyHash] = new LinkedList();
         }
