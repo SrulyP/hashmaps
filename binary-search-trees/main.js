@@ -30,8 +30,8 @@ class Tree {
 
         const currRoot = new Node(array[middle]);
 
-        const leftSubarray = array.slice(0, middle);  
-        const rightSubarray = array.slice(middle + 1);  
+        const leftSubarray = array.slice(0, middle);
+        const rightSubarray = array.slice(middle + 1);
 
         currRoot.left = buildTree(leftSubarray);
         currRoot.right = buildTree(rightSubarray);
@@ -39,7 +39,16 @@ class Tree {
         return currRoot;
     }
 
-    insert(value) {}
+    insert(value) {
+        const newNode = new Node(value);
+        let currNode = this.root;
+        if (value > currNode.data) {
+            // go right
+        } else if (value < currNode.data) {
+            // go left
+        }
+    }
+
     deleteItem(value) {}
     find(value) {}
     levelOrderForEach(callback) {}
