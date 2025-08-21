@@ -1,10 +1,10 @@
 import { LinkedList, Node } from './linked-lists.js';
 
 class HashMap {
-    constructor(loadFactor = 0.8, capacity = 16, buckets = []) {
+    constructor(loadFactor = 0.8, capacity = 16) {
         this.loadFactor = loadFactor;
         this.capacity = capacity;
-        this.buckets = buckets;
+        this.buckets = new Array(this.capacity);
     }
 
     // hash function from TOP.
@@ -21,8 +21,17 @@ class HashMap {
 
     // Increase the capacity of the hashmap array.
     increaseCapacity() {
+        const oldBuckets = this.buckets;
+        const oldCapacity = this.capacity;
+
         this.capacity *= 2;
-        // go through array, each linked list and rehash all the nodes
+        this.buckets = new Array(this.capacity);
+
+        for (let i = 0; i < oldCapacity; i++) {
+            if (oldBuckets[i]) {
+                // go through each linked list and rehash all the nodes
+            }
+        }
     }
 
     // Update or set a key's value in the hashmap.
