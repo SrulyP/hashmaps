@@ -102,7 +102,6 @@ class HashMap {
                 count += list.size();
             }
         }
-       
         return count;
     }
 
@@ -116,12 +115,36 @@ class HashMap {
     // Return an array containing all the keys inside the hash map.
     keys() {
         let keys = [];
-        
-        if (list) {
+
+        for (let i = 0; i < this.capacity; i++) {
+            const list = this.buckets[i];
+            if (list) {
+                let currentNode = list.head();
+                while (currentNode) {
+                    keys.push(currentNode.key);
+                    currentNode = currentNode.nextNode;
+                }
+            }
+        }
+        return keys;
     }
 
     // Return an array containing all the values.
-    values() {}
+    values() {
+        let values = [];
+
+        for (let i = 0; i < this.capacity; i++) {
+            const list = this.buckets[i];
+            if (list) {
+                let currentNode = list.head();
+                while (currentNode) {
+                    values.push(currentNode.value);
+                    currentNode = currentNode.nextNode;
+                }
+            }
+        }
+        return values;
+    }
 
     // Return an array that contains each key, value pair.
     entries() {}
