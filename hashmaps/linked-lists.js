@@ -132,6 +132,19 @@ export class LinkedList {
         return null;
     }
 
+    // Update the value of a node using its key to locate it. Return true if updated, false if not found.
+    updateValue(key, value) {
+        let currentNode = this.head();
+        while (currentNode) {
+            if (currentNode.key === key) {
+                currentNode.value = value;
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
+    }
+
     // Represent the LinkedList objects as strings
     toString() {
         let string = '';
