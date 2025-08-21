@@ -27,14 +27,19 @@ class HashMap {
 
     // Update or set a key's value in the hashmap.
     set(key, value) {
-        keyHash = hash(key);
-        if (this.buckets[keyHash].LinkedList.containsKey(key))
-            this.buckets[keyHash].LinkedList.;
+        if (!this.buckets[keyHash]) {
+            this.buckets[keyHash] = new LinkedList();
         }
+        const list = this.buckets[keyHash];
 
-        this.buckets[keyHash].append(Node(key, value));
-        if (this.length() > this.loadFactor * this.capacity) {
-            this.increaseCapacity();
+        if (list.containsKey(key)) {
+            list.updateValue(key, value);
+        } else {
+            list.append(new Node(key, value));
+
+            if (this.length() > this.loadFactor * this.capacity) {
+                this.increaseCapacity();
+            }
         }
     }
 
