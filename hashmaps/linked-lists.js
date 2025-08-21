@@ -145,6 +145,18 @@ export class LinkedList {
         return false;
     }
 
+    // Return the value of a node using its key to find it, return null if not found
+    getValueByKey(key) {
+        let currentNode = this.head();
+        while (currentNode) {
+            if (currentNode.key === key) {
+                return currentNode.value;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return null;
+    }
+
     // Represent the LinkedList objects as strings
     toString() {
         let string = '';
