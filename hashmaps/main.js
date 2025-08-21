@@ -147,5 +147,18 @@ class HashMap {
     }
 
     // Return an array that contains each key, value pair.
-    entries() {}
+    entries() {
+        let pairs = [];
+        for (let i = 0; i < this.capacity; i++) {
+            const list = this.buckets[i];
+            if (list) {
+                let currentNode = list.head();
+                while (currentNode) {
+                    pairs.push([currentNode.key, currentNode.value]);
+                    currentNode = currentNode.nextNode;
+                }
+            }
+        }
+        return pairs;
+    }
 }
