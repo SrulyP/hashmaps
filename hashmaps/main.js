@@ -7,7 +7,7 @@ class HashMap {
         this.buckets = buckets;
     }
 
-    // hash function from TOP
+    // hash function from TOP.
     hash(key) {
         let hashCode = 0;
 
@@ -19,16 +19,17 @@ class HashMap {
         return hashCode;
     }
 
+    // Increase the capacity of the hashmap array.
     increaseCapacity() {
         this.capacity *= 2;
         // go through array, each linked list and rehash all the nodes
     }
 
+    // Update or set a key's value in the hashmap.
     set(key, value) {
         keyHash = hash(key);
-        index = this.buckets[keyHash].LinkedList.find(value);
-        if (!index) {
-            this.buckets[keyHash].LinkedList.append()
+        if (this.buckets[keyHash].LinkedList.containsKey(key))
+            this.buckets[keyHash].LinkedList.;
         }
 
         this.buckets[keyHash].append(Node(key, value));
@@ -37,15 +38,27 @@ class HashMap {
         }
     }
 
-    get(key) {
+    // Returns value that's assigned to the key. If a key is not found, return null.
+    get(key) {}
 
-    }
-
+    // Returns true or false based on whether or not the key is in the hash map.
     has(key) {}
+
+    // Remove the entry with that key and return true. If the key isn’t in hash map, return false.
     remove(key) {}
+
+    // Return the number of stored keys in the hash map.
     length() {}
+
+    // Remove all entries in the hash map.
     clear() {}
+
+    // Return an array containing all the keys inside the hash map.
     keys() {}
+
+    // Return an array containing all the values.
     values() {}
+
+    // Return an array that contains each key, value pair.
     entries() {}
 }
