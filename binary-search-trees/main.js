@@ -160,9 +160,43 @@ class Tree {
             if (shifted.right) queue.push(shifted.right);
         }
     }
-    inOrderForEach(callback) {}
-    preOrderForEach(callback) {}
-    postOrderForEach(callback) {}
+
+    // Traverse the tree in depth-first, in-order and call the callback on each node
+    inOrderForEach(callback, node = this.root) {
+        if (typeof callback != 'function') {
+            throw new Error('Error: Please provide a callback function');
+        }
+        if (!node) return;
+
+        this.inOrderForEach(callback, node.left);
+        callback(node);
+        this.inOrderForEach(callback, node.right);
+    }
+
+    // Traverse the tree in depth-first, pre-order and call the callback on each node
+    preOrderForEach(callback, node = this.root) {
+        if (typeof callback != 'function') {
+            throw new Error('Error: Please provide a callback function');
+        }
+        if (!node) return;
+
+        callback(node);
+        this.preOrderForEach(callback, node.left);
+        this.preOrderForEach(callback, node.right);
+    }
+
+    // Traverse the tree in depth-first, post-order and call the callback on each node
+    postOrderForEach(callback, node = this.root) {
+        if (typeof callback != 'function') {
+            throw new Error('Error: Please provide a callback function');
+        }
+        if (!node) return;
+
+        this.postOrderForEach(callback, node.left);
+        this.postOrderForEach(callback, node.right);
+        callback(node);
+    }
+
     height(value) {}
     depth(value) {}
     isBalanced() {}
