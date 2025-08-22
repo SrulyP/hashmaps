@@ -33,8 +33,8 @@ class Tree {
         const leftSubarray = array.slice(0, middle);
         const rightSubarray = array.slice(middle + 1);
 
-        currRoot.left = buildTree(leftSubarray);
-        currRoot.right = buildTree(rightSubarray);
+        currRoot.left = this.buildTree(leftSubarray);
+        currRoot.right = this.buildTree(rightSubarray);
 
         return currRoot;
     }
@@ -78,18 +78,48 @@ class Tree {
                 currNode = currNode.right;
             } else if (value < currNode.data) {
                 currNode = currNode.left;
-            } else if (value === currNode.data) {
-                // case 1: has no right/left nodes
-                if (!currNode.right && !currNode.left) {
-                    currNode = null;
-                } else if (currNode.right && currNode.left) {
-                    
-
-                }
             }
         }
+        if (!currNode) return;
 
-        // case 2: has left/right vals
+        // case 1: has no children (just delete)
+        if (!currNode.right && !currNode.left) {
+            if (parentNode.left === currNode) {
+                parentNode.left = null;
+            } else {
+                parentNode.right = null;
+            }
+        } else if (!currNode.left || !currNode.right) {
+            // case 2: has one child (swap with child)
+            let child = currNode.left ? currNode.left : currNode.right;
+            if (!parentNode) {
+                this.root = child;
+            } else if (parentNode.left === currNode) {
+                parentNode.left = child;
+            } else {
+                parentNode.right = child;
+            }
+        } else if (currNode.right && currNode.left) {
+            // case 3: has 2 children (swap with in-order successor)
+            let inOrderSuccessor = getInOrderSuccessor(currNode);
+            if (!parentNode) {
+                this.root = child;
+            }
+            if (parentNode.left.data === value) {
+                parentNode.left = inOrderSuccessor;
+            } else {
+                parentNode.right = inOrderSuccessor;
+            }
+        }
+    }
+
+    // Return the in-order successor.
+    getInOrderSuccessor(currNode) {
+        currNode = currNode.right;
+        while (currNode != null && currNode.left != null) {
+            currNode = currNode.left;
+        }
+        return currNode;
     }
 
     // Returns the node with the given value, or null if it is not found.
