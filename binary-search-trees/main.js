@@ -72,7 +72,7 @@ class Tree {
         let currNode = this.root;
         let parentNode;
 
-        while (currNode.data != value) {
+        while (currNode != null && currNode.data != value) {
             parentNode = currNode;
             if (value > currNode.data) {
                 currNode = currNode.right;
@@ -80,11 +80,13 @@ class Tree {
                 currNode = currNode.left;
             }
         }
-        if (!currNode) return;
+        if (!currNode) return; // the value does not exist in the tree
 
         // case 1: has no children (just delete)
         if (!currNode.right && !currNode.left) {
-            if (parentNode.left === currNode) {
+            if (!parentNode) {
+                this.root = null;
+            } else if (parentNode.left === currNode) {
                 parentNode.left = null;
             } else {
                 parentNode.right = null;
@@ -101,14 +103,21 @@ class Tree {
             }
         } else if (currNode.right && currNode.left) {
             // case 3: has 2 children (swap with in-order successor)
-            let inOrderSuccessor = getInOrderSuccessor(currNode);
-            if (!parentNode) {
-                this.root = child;
+            // Copy the contents of the in-order successor of the node to be deleted
+            let inOrderSuccessor = this.getInOrderSuccessor(currNode);
+            currNode.data = inOrderSuccessor.data; 
+
+            // Delete in-order successor from the right subtree
+            let successorParent = currNode;
+            let successorNode = currNode.right;
+            while (successorNode.left) {
+                successorParent = successorNode;
+                successorNode = successorNode.left;
             }
-            if (parentNode.left.data === value) {
-                parentNode.left = inOrderSuccessor;
+            if (successorParent.left === successorNode) {
+                successorParent.left = successorNode.right;
             } else {
-                parentNode.right = inOrderSuccessor;
+                successorParent.right = successorNode.right;
             }
         }
     }
