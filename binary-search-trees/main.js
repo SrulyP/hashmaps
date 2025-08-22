@@ -68,8 +68,44 @@ class Tree {
         return;
     }
 
-    deleteItem(value) {}
-    find(value) {}
+    deleteItem(value) {
+        let currNode = this.root;
+        let parentNode;
+
+        while (currNode.data != value) {
+            parentNode = currNode;
+            if (value > currNode.data) {
+                currNode = currNode.right;
+            } else if (value < currNode.data) {
+                currNode = currNode.left;
+            } else if (value === currNode.data) {
+                // case 1: has no right/left nodes
+                if (!currNode.right && !currNode.left) {
+                    currNode = null;
+                } else if (currNode.right && currNode.left) {
+                    
+
+                }
+            }
+        }
+
+        // case 2: has left/right vals
+    }
+
+    // Returns the node with the given value, or null if it is not found.
+    find(value) {
+        currNode = this.root;
+        while (currNode.data != value) {
+            if (value > currNode.data) {
+                currNode = currNode.right;
+            } else {
+                currNode = currNode.left;
+            }
+            return currNode;
+        }
+        return null;
+    }
+
     levelOrderForEach(callback) {}
     inOrderForEach(callback) {}
     preOrderForEach(callback) {}
