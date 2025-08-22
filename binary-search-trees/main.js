@@ -105,7 +105,7 @@ class Tree {
             // case 3: has 2 children (swap with in-order successor)
             // Copy the contents of the in-order successor of the node to be deleted
             let inOrderSuccessor = this.getInOrderSuccessor(currNode);
-            currNode.data = inOrderSuccessor.data; 
+            currNode.data = inOrderSuccessor.data;
 
             // Delete in-order successor from the right subtree
             let successorParent = currNode;
@@ -145,7 +145,21 @@ class Tree {
         return null;
     }
 
-    levelOrderForEach(callback) {}
+    // Traverse the tree in breadth-first level order and call the callback on each node
+    levelOrderForEach(callback) {
+        if (typeof callback != 'function') {
+            throw new Error('Error: Please provide a callback function');
+        }
+        if (!this.root) return;
+
+        let queue = [this.root];
+        while (queue.length > 0) {
+            const shifted = queue.shift();
+            callback(shifted);
+            if (shifted.left) queue.push(shifted.left);
+            if (shifted.right) queue.push(shifted.right);
+        }
+    }
     inOrderForEach(callback) {}
     preOrderForEach(callback) {}
     postOrderForEach(callback) {}
