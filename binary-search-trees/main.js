@@ -9,7 +9,7 @@ class Node {
 class Tree {
     constructor(array) {
         this.array = array;
-        this.root = buildTree(this.array);
+        this.root = this.buildTree(this.array);
     }
 
     // Create a balanced binary tree full of Node objects. Return the level - 0 root node.
@@ -19,9 +19,7 @@ class Tree {
         array = [...new Set(array)];
 
         // if it's the last node
-        if (array.length === 0) {
-            return null;
-        }
+        if (array.length === 0) return null;
 
         // else, slice the array into 2 sub-arrays, run buildTree on left sides, then right side
         const start = 0;
@@ -44,12 +42,10 @@ class Tree {
         let currNode = this.root;
         let parentNode;
 
-        if (currNode === null) {
-            return;
-        }
+        if (!currNode) return;
 
         // loop through to find where to insert the new node
-        while (currNode != null) {
+        while (currNode) {
             parentNode = currNode;
             if (value > currNode.data) {
                 currNode = currNode.right;
@@ -72,7 +68,7 @@ class Tree {
         let currNode = this.root;
         let parentNode;
 
-        while (currNode != null && currNode.data != value) {
+        while (currNode && currNode.data != value) {
             parentNode = currNode;
             if (value > currNode.data) {
                 currNode = currNode.right;
@@ -133,16 +129,17 @@ class Tree {
 
     // Returns the node with the given value, or null if it is not found.
     find(value) {
-        currNode = this.root;
-        while (currNode.data != value) {
-            if (value > currNode.data) {
+        let currNode = this.root;
+        while (currNode) {
+            if (value === currNode.data) {
+                return currNode;
+            } else if (value > currNode.data) {
                 currNode = currNode.right;
             } else {
                 currNode = currNode.left;
             }
-            return currNode;
         }
-        return null;
+        return null; // not found
     }
 
     // Traverse the tree in breadth-first level order and call the callback on each node
@@ -197,8 +194,26 @@ class Tree {
         callback(node);
     }
 
-    height(value) {}
+    // Return the height of the node containing the given value.
+    height(value) {
+        const currNode = this.find(value);
+        if (!currNode) return null;
+        return this.heightHelper(currNode);
+    }
+
+    heightHelper(currNode) {
+        if (!currNode) return 0;
+        return (
+            1 +
+            Math.max(
+                this.heightHelper(currNode.left),
+                this.heightHelper(currNode.right)
+            )
+        );
+    }
+
     depth(value) {}
+
     isBalanced() {}
     rebalance() {}
 }
