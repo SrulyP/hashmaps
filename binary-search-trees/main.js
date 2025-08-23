@@ -235,8 +235,8 @@ class Tree {
 
     isBalancedHelper(node) {
         if (!node) return true;
-        let left = this.height(node.left);
-        let right = this.height(node.right);
+        let left = node.left ? this.height(node.left.data) : 0;
+        let right = node.right ? this.height(node.right.data) : 0;
         if (Math.abs(left - right) > 1) {
             return false;
         }
@@ -258,6 +258,6 @@ class Tree {
 
         this.rebalanceHelper(node.left, queue);
         this.rebalanceHelper(node.right, queue);
-        arr.push(node.data);
+        queue.push(node.data);
     }
 }
