@@ -212,6 +212,7 @@ class Tree {
         );
     }
 
+    // Return the depth of the node containing the given value.
     depth(value) {
         const desiredNode = this.find(value);
         if (!desiredNode) return null;
@@ -224,6 +225,23 @@ class Tree {
         return depth;
     }
 
-    isBalanced() {}
-    rebalance() {}
+    // Return true if the tree is balanced, false otherwise
+    isBalanced() {
+        return this.isBalancedHelper(this.root);
+    }
+
+    isBalancedHelper(node) {
+        if (!node) return true;
+        let left = this.height(node.left);
+        let right = this.height(node.right);
+        if (Math.abs(left - right) > 1) {
+            return false;
+        }
+        return this.isBalancedHelper(node.left) && this.isBalancedHelper(node.right);
+    }
+
+    // Rebalance an unbalanced tree
+    rebalance() {
+        let queue = [this.root];
+    }
 }
