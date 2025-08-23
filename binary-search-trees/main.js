@@ -237,11 +237,24 @@ class Tree {
         if (Math.abs(left - right) > 1) {
             return false;
         }
-        return this.isBalancedHelper(node.left) && this.isBalancedHelper(node.right);
+        return (
+            this.isBalancedHelper(node.left) &&
+            this.isBalancedHelper(node.right)
+        );
     }
 
     // Rebalance an unbalanced tree
     rebalance() {
-        let queue = [this.root];
+        const queue = [];
+        this.rebalanceHelper(this.root, queue);
+        this.root = this.buildTree(queue);
+    }
+
+    rebalanceHelper(node, queue) {
+        if (!node) return;
+
+        this.rebalanceHelper(node.left, queue);
+        this.rebalanceHelper(node.right, queue);
+        arr.push(node.data);
     }
 }
