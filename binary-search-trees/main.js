@@ -212,7 +212,17 @@ class Tree {
         );
     }
 
-    depth(value) {}
+    depth(value) {
+        const desiredNode = this.find(value);
+        if (!desiredNode) return null;
+        let root = this.root;
+        let depth = 0;
+        while (root != desiredNode) {
+            value > root.data ? (root = root.right) : (root = root.left);
+            depth += 1;
+        }
+        return depth;
+    }
 
     isBalanced() {}
     rebalance() {}
