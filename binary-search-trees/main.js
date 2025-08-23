@@ -42,7 +42,10 @@ class Tree {
         let currNode = this.root;
         let parentNode;
 
-        if (!currNode) return;
+        if (!currNode) {
+            this.root = newNode;
+            return;
+        }
 
         // loop through to find where to insert the new node
         while (currNode) {
